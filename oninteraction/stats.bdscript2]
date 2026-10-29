@@ -1,0 +1,17 @@
+$nomention
+$textSplit[$customID;#]
+$onlyIf[$splitText[1]==farm; ]
+$color[FFFFFF]
+$if[$splitText[2]==stats]
+$var[dono;$splitText[3]]
+$if[$var[dono]!=$authorID]$ephemeral $removeButtons that's not your button. $stop $endif
+$suppressErrors
+$textSplit[$getVar[FarmStats;$authorID];/]
+$var[i;1]
+$var[code;$repeatMessage[10;$|textSplit[$|splitText[$|var[i\]\]%|{-SEMICOL-}%:\]$|if[$|splitText[2\]==\]$|var[i%|{-SEMICOL-}%$|calculate[$|var[i\]+1\]\]$|elseif[1==1\]Position $|var[i\]. **$|splitText[1\]** $|var[tempo%|{-SEMICOL-}%$|sum[$|splitText[2\]%|{-SEMICOL-}%$|splitText[4\]\]\]$|if[$|var[tempo\]<=$|getTimestamp[s\]\]ready! <t:$|var[tempo\]:R>$|elseif[2>1\]ready <t:$|var[tempo\]:R> $|endif $|var[i%|{-SEMICOL-}%$|calculate[$|var[i\]+1\]\] $|endif $|textSplit[$|getVar[FarmStats%|{-SEMICOL-}%$|authorID\]%|{-SEMICOL-}%/\]
+]]
+$var[code;$repeatMessage[4;$var[code]]]
+$title[🪴 All of your crops!]
+$description[$eval[$replaceText[$var[code];|;;-1]]]
+ 
+$endif
