@@ -1,0 +1,14 @@
+$nomention
+$if[$varExists[FarmMapa]==false]$title[add The Variable **FarmMapa**]$addField[value:;0,0,0,0,0,0,0,0,2,2,0,1,1,0,0,2,2,0,1,1,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0] $stop$endif 
+$if[$varExists[FarmFeira]==false]$title[add The Variable **FarmFeira**]$addField[value:;5:wheat:100:60:105/6:cotton:200:100:210/7:lavender:500:200:520/8:jasmin:1000:300:1050/9:potato:5000:1400:5300/10:bonsai:638:600000:10000] $stop$endif 
+$if[$varExists[FarmStats]==false]$title[add The Variable **FarmStats**]$addField[value:;/////////////////////////////////////////////////] $stop$endif 
+$if[$varExists[FarmCoins]==false]$title[add The Variable **FarmCoins**]$addField[value:;500] $stop$endif 
+
+$onlyIf[$guildID!=; nah]
+
+$onlyIf[$checkUserPerms[$botID;embedlinks]==true; gimme embedlinks perm]
+
+$color[FFFFFF]
+$description[🧑‍🌾 Welcome to your farm.]
+$addButton[no;farm#move#$authorID#1#+0;Plant;primary;no;🥕]
+$addButton[yes;farm#stats#$authorID;Status;secondary;no;🌾]

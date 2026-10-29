@@ -1,0 +1,153 @@
+$nomention
+$textSplit[$customID;#]
+$onlyIf[$splitText[1]==farm; ]
+$suppressErrors
+$var[dono;$splitText[3]]
+$if[$var[dono]!=$authorID]$ephemeral $removeButtons that's not your button. $stop $endif
+$var[pos;$splitText[4]]
+$var[move;$splitText[5]]
+$var[u;🧑‍🌾]
+$var[0;🟩]
+$var[1;🟪]
+$var[2;🟫] 
+$var[5;🌾]
+$var[6;🌾]
+$var[7;🌾]
+$var[8;🌾]
+$var[9;🌾]
+$var[10;🌾]
+$var[FarmCoin;🌱]
+$c[you can change The emojis, idc to this] 
+$color[FFFFFF]
+$if[$splitText[2]==move]
+$var[largura;7]
+$var[altura;7]
+$removeButtons
+$var[pos;$calculate[$var[pos]$var[move]]]$var[userB;$var[pos]]
+$addButton[no;farm#move#$authorID#$var[pos]#-1; ;primary;no;⬅️]
+$addButton[no;farm#move#$authorID#$var[pos]#-7; ;primary;no;⬆️] 
+$addButton[no;farm#move#$authorID#$var[pos]#+7; ;primary;no;⬇️]
+$addButton[no;farm#move#$authorID#$var[pos]#+1; ;primary;no;➡️] 
+$var[int;1 2 3 4 5 6 7 8 9 10] $var[a;1] $textSplit[$var[int]; ] $var[codeint;$repeatMessage[$getTextSplitLength;$|var[int$|var[a\]%|{-SEMICOL-}%$|splitText[$|var[a\]\]\]$|var[a%|{-SEMICOL-}%$|sum[$|var[a\]%|{-SEMICOL-}%1\]\] ]] $var[codeint;$repeatMessage[3;$var[codeint]]]$eval[$replaceText[$var[codeint];|;;-1]]
+$textSplit[$getVar[FarmMapa;$authorID];,] $var[a;1] 
+$var[codeint;$repeatMessage[10;$|if[$|splitText[$|var[pos\]\]==$|var[int$|var[a\]\]\]$|addButton[yes%|{-SEMICOL-}%farm#int#$|authorID#$|var[pos\]#$|splitText[$|var[pos\]\]%|{-SEMICOL-}%Plant%|{-SEMICOL-}%secondary%|{-SEMICOL-}%no%|{-SEMICOL-}%🥕\]$|endif$|var[a%|{-SEMICOL-}%$|sum[$|var[a\]%|{-SEMICOL-}%1\]\]]] $eval[$replaceText[$var[codeint];|;;-1]]
+$var[i;0]$var[a;1]$var[fileira;$var[largura]]
+$var[code;$repeatMessage[$var[altura];$|var[i%|{-SEMICOL-}%$|sum[$|var[i\]%|{-SEMICOL-}%1\]\]$|if[$|var[pos\]==$|var[i\]\]$|var[u\]$|elseif[i!=\]$|var[$|splitText[$|var[i\]\]\]$|endif$|if[$|var[fileira\]==$|var[i\]\]
+$|var[fileira%|{-SEMICOL-}%$|sum[$|var[fileira\]%|{-SEMICOL-}%$|var[largura\]\]\]$|endif]]
+$var[code;$repeatMessage[$var[largura];$var[code]]]
+$description[$eval[$replaceText[$var[code];|;;-1]]]
+$endif
+$if[$splitText[2]==int]
+$if[$splitText[5]==2]
+$removeButtons
+$description[You can plant here!]
+$addButton[no;farm#feira#$authorID#$var[pos]#1;Buy crops;success;no;🪴]
+$addButton[no;farm#move#$authorID#$var[pos]#+0;Back;secondary;no;⬅️]
+$endif
+$if[$splitText[5]==1]
+$removeButtons
+$description[You Will need to buy this!
+the price is 1k$var[FarmCoin] ?]
+$addButton[no;farm#terreno#$authorID#$var[pos]#1#+0;Buy;secondary;no;🛒]
+$addButton[no;farm#move#$authorID#$var[pos]#+0;back;secondary;no;⬅️]
+$endif
+$if[$splitText[5]>=5]
+$var[pos;$splitText[4]]
+$textSplit[$getVar[FarmStats;$authorID];/]
+$textSplit[$splitText[$var[pos]];:]
+$title[$splitText[1] status 🌱 ]
+$if[$sum[$splitText[2];$splitText[4]]<=$getTimestamp[s]] 
+$description[You can collect it!
+🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 (`100%`)]
+$addButton[no;farm#colher#$authorID#$var[pos];harvest;success;no;🪴]
+$else
+$var[%;$sub[$getTimestamp[s];$splitText[4]]]
+$enableDecimals[yes]
+
+$var[%;$multi[$divide[$var[%];$splitText[2]];10]]
+$var[i;1]
+$var[barraON;🟩]$var[barraOFF;⬜]$var[code;$repeatMessage[10;$|if[$|var[i\]<=$|var[%\]\]$|var[barraON\]$|elseif[1==1\]$|var[barraOFF\]$|endif$|var[i%|{-SEMICOL-}%$|calculate[$|var[i\]+1\]\]]]
+
+$description[you can harvest it <t:$sum[$splitText[2];$splitText[4]]:R>
+$eval[$replaceText[$var[code];|;;-1]] (`$round[$multi[$var[%];10]]%`) ]
+
+$endif
+$endif
+$endif
+
+$if[$splitText[2]==feira]
+$var[pos;$splitText[4]]
+
+$var[ind;$calculate[$splitText[5]$splitText[6]]]
+$textSplit[$getVar[FarmFeira];/]$var[i;1]
+$if[$var[ind]>$getTextSplitLength]$var[ind;1]$endif
+$if[$var[ind]<1]$var[ind;$getTextSplitLength]$endif
+$removeButtons 
+$addButton[no;farm#feira#$authorID#$var[pos]#$var[ind]#-1; ;primary;no;⬆️]
+$addButton[no;farm#move#$authorID#$var[pos]#+0;Voltar;secondary;no;⬅️]
+$addButton[yes;farm#feira#$authorID#$var[pos]#$var[ind]#+1; ;primary;no;⬇️]
+$addButton[no;farm#plantar#$authorID#$var[pos]#$var[ind];plant;success;no;🪴]
+$var[code;$repeatMessage[6;$|textSplit[$|splitText[$|var[i\]\]%|{-SEMICOL-}%:\] **($|splitText[2\])** - $|splitText[3\]$var[FarmCoin]  - $|round[$|divide[$|splitText[4\]%|{-SEMICOL-}%60\]%|{-SEMICOL-}%2\] min. $|if[$|var[ind\]==$|var[i\]\] ⬅️$|endif
+$t|extSplit[$|getVar[FarmFeira\]%|{-SEMICOL-}%/\] $|var[i%|{-SEMICOL-}%$|calculate[$|var[i\]+1\]\]]]
+$description[# Shop 🥕
+$eval[$replaceText[$var[code];|;;-1]]
+You have: $getVar[FarmCoins;$authorID]$var[FarmCoin] ]
+
+$endif
+$if[$splitText[2]==terreno]
+
+$var[pos;$splitText[4]]
+$if[$getVar[FarmCoins;$authorID]<1000]
+$description[
+( ⚠️ ) - You don't have enough money.]
+$else
+$removeButtons
+$setVar[FarmCoins;$sub[$getVar[FarmCoins;$authorID];1000];$authorID]
+$textSplit[$getVar[FarmMapa;$authorID];,]
+$editSplitText[$var[pos];2]
+$setVar[FarmMapa;$joinSplitText[,];$authorID]
+
+$description[You can plant here!]
+$addButton[no;farm#feira#$authorID#$var[pos]#1;buy crop;success;no;🪴]
+$addButton[no;farm#move#$authorID#$var[pos]#+0;back;secondary;no;⬅️]
+$endif
+$endif 
+
+$if[$splitText[2]==plantar]
+$var[ind;$splitText[5]]
+$var[pos;$splitText[4]]
+$textSplit[$getVar[FarmFeira];/]$var[i;1]
+$textSplit[$splitText[$var[ind]];:]
+$if[$getVar[FarmCoins;$authorID]<$splitText[3]] $ephemeral $removeButtons You don't have enough money. **$splitText[2]**! $stop$endif
+$var[id;$splitText[1]] $var[nome;$splitText[2]] $var[preço;$splitText[3]] $var[tempo;$splitText[4]] $var[revenda;$splitText[5]]
+$textSplit[$getVar[FarmMapa;$authorID];,]
+$editSplitText[$var[pos];$var[id]]
+$setVar[FarmMapa;$joinSplitText[,];$authorID]
+$setVar[FarmCoins;$sub[$getVar[FarmCoins;$authorID];$var[preço]];$authorID]
+$textSplit[$getVar[FarmStats;$authorID];/]
+$editSplitText[$var[pos];$var[nome]:$var[tempo]:$var[revenda]:$getTimestamp[s]]
+$setVar[FarmStats;$joinSplitText[/];$authorID]
+$description[# Success ✅]
+$removeButtons
+$addButton[no;farm#move#$authorID#$var[pos]#+0;back;secondary;no;⬅️]
+$endif
+$if[$splitText[2]==colher]
+$var[pos;$splitText[4]]
+$textSplit[$getVar[FarmStats;$authorID];/]
+$textSplit[$splitText[$var[pos]];:]
+$onlyIf[$splitText[2]!=; ]
+$if[$sum[$splitText[2];$splitText[4]]<=$getTimestamp[s]] 
+$removeButtons
+$addButton[no;farm#move#$authorID#$var[pos]#+0;back;secondary;no;⬅️]
+$description[
+**Congrats!**, you received $splitText[3]$var[FarmCoin] !]
+$setVar[FarmCoins;$sum[$getVar[FarmCoins;$authorID];$splitText[3]];$authorID]
+$textSplit[$getVar[FarmMapa;$authorID];,]
+$editSplitText[$var[pos];2]
+$setVar[FarmMapa;$joinSplitText[,];$authorID]
+$textSplit[$getVar[FarmStats;$authorID];/]
+$editSplitText[$var[pos]; ]
+$setVar[FarmStats;$joinSplitText[/];$authorID]
+$else
+$endif
+$endif
